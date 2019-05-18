@@ -4,4 +4,9 @@
     <string name="btn_star">开始</string>
     <string name="btn_stop">暂停</string>
     <string name="btn_next">下一首</string>
+    <string name="setting">设置</string>
+    <string name="about">关于</string>
+    <string name="exit">退出</string>
+
+
 </resources>
