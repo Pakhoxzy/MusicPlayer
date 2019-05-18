@@ -5,12 +5,16 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.musicplayer.R;
 
 import java.io.File;
@@ -218,5 +222,28 @@ public class MainActivity extends AppCompatActivity implements Runnable {
 
         return info + now + " / " + all;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.set:
+                Toast.makeText(this,"设置暂未启用",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.about:
+                Toast.makeText(this,"by pakho",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.exit:
+                Toast.makeText(this,"退出暂未启用",Toast.LENGTH_SHORT).show();
+                break;
 
+                default:
+        }
+        return true;
+
+    }
 }
+
