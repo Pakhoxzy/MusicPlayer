@@ -1,5 +1,10 @@
 package com.example.musicplayer;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +23,8 @@ import android.widget.Toast;
 import com.example.musicplayer.R;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Runnable {
     int flag = 1;//设置一个标志，供点击“开始/暂停”按钮使用
@@ -227,6 +234,8 @@ public class MainActivity extends AppCompatActivity implements Runnable {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    public static List<Activity> activityList = new ArrayList<Activity>();
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
@@ -234,11 +243,40 @@ public class MainActivity extends AppCompatActivity implements Runnable {
                 Toast.makeText(this,"设置暂未启用",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.about:
-                Toast.makeText(this,"by pakho",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"by xuzhengyang",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.exit:
-                Toast.makeText(this,"退出暂未启用",Toast.LENGTH_SHORT).show();
-                break;
+                new AlertDialog.Builder(MainActivity.this).setTitle("温馨提示")
+                        .setMessage("确定退出?")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // TODO Auto-generated method stub
+                                        //finish();
+                                        // 关闭所有Activity
+                                        for (int i = 0; i < activityList.size(); i++)
+                                        {
+                                            if (null != activityList.get(i))
+                                            {
+                                                activityList.get(i).finish();
+                                            }
+                                        }
+                                        ActivityManager activityManager =(ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                                        activityManager.restartPackage(getPackageName());
+                                        System.exit(0);
+
+                                    }
+                                }
+                        ).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
+
+                return true;
+
 
                 default:
         }
