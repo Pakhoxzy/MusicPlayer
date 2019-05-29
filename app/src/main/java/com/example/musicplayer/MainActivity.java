@@ -5,6 +5,7 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -235,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements Runnable {
         return true;
     }
 
+
     public static List<Activity> activityList = new ArrayList<Activity>();
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -243,7 +246,8 @@ public class MainActivity extends AppCompatActivity implements Runnable {
                 Toast.makeText(this,"设置暂未启用",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.about:
-                Toast.makeText(this,"by xuzhengyang",Toast.LENGTH_SHORT).show();
+                new android.support.v7.app.AlertDialog.Builder(MainActivity.this).setTitle("提示")
+                        .setMessage("这是一个简单的本地音乐播放器").show();
                 break;
             case R.id.exit:
                 new AlertDialog.Builder(MainActivity.this).setTitle("温馨提示")
